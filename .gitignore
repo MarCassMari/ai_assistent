@@ -1,1 +1,43 @@
+# Environment Variables
+# Keep secret keys, API keys, and other sensitive data out of version control.
 .env
+.env.*
+!.env.example
+
+# Python Virtual Environments
+# These are specific to your machine and can be very large.
+# Recreate them from requirements.txt instead.
+venv/
+.venv/
+env/
+ENV/
+
+# Python cache and compiled files
+# These are generated automatically by the Python interpreter.
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Distribution / packaging
+# These are build artifacts, not source code.
+build/
+dist/
+*.egg-info/
+
+# IDE / Editor directories
+# Your personal editor settings don't belong in the project.
+.vscode/
+.idea/
+.project
+.pydevproject
+
+# Testing artifacts
+# Caches and reports from testing tools like pytest and coverage.
+.pytest_cache/
+.coverage
+htmlcov/
+
+# OS-generated files
+.DS_Store
+Thumbs.db
