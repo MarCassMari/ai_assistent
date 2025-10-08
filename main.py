@@ -18,7 +18,14 @@ class PoemaResponse(BaseModel):
 llm = ChatOpenAI(model = "gpt-4o-mini", temperature=0)
 llmTwo = ChatAnthropic(model = "claude-4", temperature=0) 
 
-response =llm.invoke("Escreva um poema de amor para minha namorada.")
-print(response)
+parse = PydanticOutputParser(pydantic_object=PoemaResponse)
 
+prompt = ChataPromptTemplate.from_messages(
+    [
+        ("system", """Você é um poeta renomado.
+         Escreva um poema com base no tema fornecido.
+         Escreva a saida no seguinte formato e não forneça mais nada além disso\n{format_instructions}         
+         """,)
+
+    ]).partial(format_instructions=parse.get_format_instructions())
 
