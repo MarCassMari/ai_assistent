@@ -1,10 +1,10 @@
 from dotenv import load_dotenv
-from pydanic import BaseModel
+from pydantic import BaseModel
 from langchain_openai import ChatOpenAI
 from langchain_anthropic import ChatAnthropic
 from langchain_core.prompts import ChataPromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser
-from langchain.agent import create_openai_tools_agent, AgentExecutor
+from langchain.agents import create_too_calling_agent, AgentExecutor
 load_dotenv()
 
 class PoemaResponse(BaseModel):
