@@ -25,7 +25,8 @@ prompt = ChataPromptTemplate.from_messages(
         ("system", """Você é um poeta renomado.
          Escreva um poema com base no tema fornecido.
          Escreva a saida no seguinte formato e não forneça mais nada além disso\n{format_instructions}         
-         """,)
+         """,),
+         ("human", "{query}"),
 
     ]).partial(format_instructions=parse.get_format_instructions())
 
@@ -37,5 +38,5 @@ agent = create_too_calling_agent(
    
 )
 agente_executor = AgentExecutor(agent=agent, tools=[], verbose=True)
-response = agente_executor.invoke({})
+response = agente_executor.invoke({"query": "Escreva um poema sobre a beleza da natureza."})
 print(response)
