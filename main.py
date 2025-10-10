@@ -1,0 +1,47 @@
+from dotenv import load_dotenv
+from pydantic import BaseModel
+from langchain_openai import ChatOpenAI
+from langchain_anthropic import ChatAnthropic
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import PydanticOutputParser
+from langchain.agents import create_tool_calling_agent, AgentExecutor
+load_dotenv()
+
+class PoemaResponse(BaseModel):
+    poema: str
+    autor: str
+    tema: str
+    data_de_criacao: str
+
+
+# Initialize LLMs - choose one or both - depending on your use case
+llm = ChatOpenAI(model = "gpt-4o-mini", temperature=0)
+llmTwo = ChatAnthropic(model = "claude-4", temperature=0) 
+
+parse = PydanticOutputParser(pydantic_object=PoemaResponse)
+
+prompt = ChatPromptTemplate.from_messages(
+    [
+        ("system", """Você é um poeta renomado.
+         Escreva um poema com base no tema fornecido.
+         Escreva a saida no seguinte formato e não forneça mais nada além disso\n{format_instructions}         
+         """,),
+         ("human", "{query}"),
+
+    ]).partial(format_instructions=parse.get_format_instructions())
+
+agent = create_tool_calling_agent(
+    llm=llm,
+    tools=[],
+    prompt=prompt,
+    output_parser=parse,
+   
+)
+agente_executor = AgentExecutor(agent=agent, tools=[], verbose=True)
+response = agente_executor.invoke({"query": "Escreva um poema sobre a beleza da natureza."})
+print(response)
+
+try:
+ structred_output = parse.parse(response.get("output")[0]["text"])
+except Exception as e:
+    print(f"Erro ao analisar a resposta: {e}","Resposta bruta:", response)
