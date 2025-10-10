@@ -40,3 +40,8 @@ agent = create_tool_calling_agent(
 agente_executor = AgentExecutor(agent=agent, tools=[], verbose=True)
 response = agente_executor.invoke({"query": "Escreva um poema sobre a beleza da natureza."})
 print(response)
+
+try:
+ structred_output = parse.parse(response.get("output")[0]["text"])
+except Exception as e:
+    print(f"Erro ao analisar a resposta: {e}","Resposta bruta:", response)

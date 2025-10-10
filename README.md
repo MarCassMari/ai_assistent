@@ -37,6 +37,30 @@ Este projeto é um assistente de IA em português, construído com LangChain, qu
 
 Este projeto pode ser facilmente escalado para uma API dinâmica, permitindo integração com frontends web ou mobile. A arquitetura modular facilita a reutilização dos fluxos de geração de conteúdo em diferentes interfaces.
 
+## GitHub Copilot e IA Assistant
+
+Este projeto inclui configurações específicas para otimizar o trabalho com assistentes de IA, incluindo GitHub Copilot:
+
+### Copilot Instructions
+O arquivo `.github/copilot-instructions.md` contém instruções detalhadas para orientar assistentes de IA no desenvolvimento deste projeto, incluindo:
+
+- **Visão geral da arquitetura**: Estrutura do projeto e propósito de cada arquivo
+- **Padrões de código**: Configuração dual de LLMs, uso de Pydantic para validação
+- **Convenções específicas**: Prompts em português e saída estruturada
+- **Problemas conhecidos**: Imports incompletos e variáveis não definidas
+- **Fluxo de desenvolvimento**: Setup do ambiente e próximos passos
+
+### Documentação do GitHub Copilot
+Para mais informações sobre como usar e configurar o GitHub Copilot:
+
+- **GitHub Copilot Documentation**: https://docs.github.com/en/copilot
+- **VS Code Copilot Instructions**: https://aka.ms/vscode-instructions-docs
+- **Copilot Best Practices**: https://docs.github.com/en/copilot/using-github-copilot/best-practices-for-using-github-copilot
+- **Copilot Chat**: https://docs.github.com/en/copilot/github-copilot-chat
+
+### Como usar as instruções
+As instruções no arquivo `.github/copilot-instructions.md` são automaticamente carregadas pelo GitHub Copilot e outros assistentes de IA compatíveis, proporcionando contexto específico do projeto para sugestões mais precisas e relevantes.
+
 ## Documentações de Base Utilizadas
 
 Este projeto foi desenvolvido utilizando as seguintes documentações oficiais como referência:
