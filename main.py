@@ -2,9 +2,9 @@ from dotenv import load_dotenv
 from pydantic import BaseModel
 from langchain_openai import ChatOpenAI
 from langchain_anthropic import ChatAnthropic
-from langchain_core.prompts import ChataPromptTemplate
+from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser
-from langchain.agents import create_too_calling_agent, AgentExecutor
+from langchain.agents import create_tool_calling_agent, AgentExecutor
 load_dotenv()
 
 class PoemaResponse(BaseModel):
@@ -20,7 +20,7 @@ llmTwo = ChatAnthropic(model = "claude-4", temperature=0)
 
 parse = PydanticOutputParser(pydantic_object=PoemaResponse)
 
-prompt = ChataPromptTemplate.from_messages(
+prompt = ChatPromptTemplate.from_messages(
     [
         ("system", """Você é um poeta renomado.
          Escreva um poema com base no tema fornecido.
@@ -30,7 +30,7 @@ prompt = ChataPromptTemplate.from_messages(
 
     ]).partial(format_instructions=parse.get_format_instructions())
 
-agent = create_too_calling_agent(
+agent = create_tool_calling_agent(
     llm=llm,
     tools=[],
     prompt=prompt,
